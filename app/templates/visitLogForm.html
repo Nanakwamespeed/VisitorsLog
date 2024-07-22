@@ -1,10 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visit Logs</title>
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
+
+    <!-- BASE CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/vendor.css') }}" rel="stylesheet">
+
+    <!-- MODERNIZR MENU -->
+    <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
 </head>
+
 <body>
-$END$
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div><!-- /Preload -->
+
+<!--    <div id="loader_form">-->
+<!--        <div data-loader="circle-side-2"></div>-->
+<!--    </div>-->
+    <!-- /loader_form -->
+
+    <div class="container-fluid full-height">
+        <div class="row row-height">
+            <div class="col-lg-6 content-left">
+                <div class="content-left-wrapper">
+                    <a href="#" id="logo"><img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="" width="49" height="45"></a>
+                    <div>
+                        <figure><img src="img/info_graphic_1.svg" alt="" class="img-fluid"></figure>
+                        <h2>Visit Logs</h2>
+                        <p>You are welcome to Ghana Link Network Service</p>
+                    </div>
+                </div>
+                <!-- /content-left-wrapper -->
+            </div>
+            <!-- /content-left -->
+
+            <div class="col-lg-6 content-right" id="start">
+                <div id="wizard_container" class="my-auto">
+                    <div id="top-wizard">
+                        <div id="progressbar"></div>
+                    </div>
+                    <!-- /top-wizard -->
+                    <form id="wrapped" method="POST" action="{{ url_for('create_visit') }}">
+                        <input id="website" name="website" type="text" value="">
+                        <!-- Leave for security protection, read docs for details -->
+                        <div id="middle-wizard">
+                            <div class="step">
+                                <h3 class="main_question"><strong>1/2</strong>Please fill with your details</h3>
+                                <div class="form-group">
+                                    <input type="text" name="firstname" class="form-control required" placeholder="First Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="lastname" class="form-control required" placeholder="Last Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" class="form-control required" placeholder="Your Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" name="phone" class="form-control required" placeholder="Your Phone Number" required>
+                                </div>
+                                <div class="form-group">
+                                    <div class="styled-select clearfix">
+                                        <select class="wide required" name="purpose" required>
+                                            <option value="" disabled selected>Your Reason For Visiting</option>
+                                            <option value="Official Appointment">Official Appointment</option>
+                                            <option value="Unofficial Appointment">Unofficial Appointment</option>
+                                            <option value="Delivery">Delivery</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="submit step">
+                                <h3 class="main_question"><strong>2/2</strong>Who are you here to see?</h3>
+                                <div class="form-group">
+                                    <div class="styled-select clearfix">
+                                        <input type="text" id="userSearch" name="staff_name" class="form-control"
+                                               placeholder="Type a name">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="bottom-wizard">
+                            <button type="button" name="backward" class="backward">Prev</button>
+                            <button type="button" name="forward" class="forward">Next</button>
+                            <button type="submit" name="process" class="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_scripts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/velocity.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/survey_func.js') }}"></script>
+
+    <!-- Custom Script -->
+    <script>
+        $(document).ready(function () {
+            $("#wrapped").on("submit", function (event) {
+                event.preventDefault();
+
+                var visitData = {
+                    full_name: $('input[name="firstname"]').val() + " " + $('input[name="lastname"]').val(),
+                    email: $('input[name="email"]').val(),
+                    phone: $('input[name="phone"]').val(),
+                    staff_name: $('input[name="staff_name"]').val(),
+                    purpose: $('select[name="purpose"]').val(),
+                };
+
+                $.ajax({
+                    url: "/create-visit",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(visitData),
+                    success: function (response) {
+                        alert("Visit data submitted successfully!");
+                        $("#wrapped")[0].reset();
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        alert("An error occurred: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>

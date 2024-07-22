@@ -1,10 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Visit Logs</title>
+
+    <!-- GOOGLE WEB FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
+
+    <!-- BASE CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/vendor.css') }}" rel="stylesheet">
+
+    <!-- MODERNIZR MENU -->
+    <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
 </head>
+
 <body>
+    <div id="preloader">
+        <div data-loader="circle-side"></div>
+    </div><!-- /Preload -->
+
+    <div class="container-fluid full-height">
+        <div class="row row-height">
+            <div class="col-lg-6 content-left">
+                <div class="content-left-wrapper">
+                    <a href="index.html" id="logo"><img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="" width="49" height="45"></a>
+                    <div>
+                        <figure><img src="img/info_graphic_1.svg" alt="" class="img-fluid"></figure>
+                        <h2>Visit Logs</h2>
+                        <p>You are welcome to Ghana Link Network Service</p>
+                    </div>
+                </div>
+                <!-- /content-left-wrapper -->
+            </div>
+            <!-- /content-left -->
+
+            <div class="col-lg-6 content-right" id="start">
+                <div id="wizard_container" class="my-auto">
+                    <div id="top-wizard">
+                        <div id="progressbar"></div>
+                    </div>
+                    <!-- /top-wizard -->
+                    <form id="wrapped">
+                        <input id="website" name="website" type="text" value="">
+                        <!-- Leave for security protection, read docs for details -->
+                        <div id="middle-wizard">
+                            <div class="submit step" id="step-1">
+                            <h3 class="main_question">How would you like to respond?</h3>
+                                <div class="form-group">
+                                    <label class="container_radio version_2">Accept
+                                        <input type="radio" name="status" id="accept" value="Accept" class="required" onchange="getVals(this, 'status'); toggleHiddenInput();">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <label class="container_radio version_2">Decline
+                                        <input type="radio" name="status" id="decline" value="Decline" class="required" onchange="getVals(this, 'status'); toggleHiddenInput();">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group" style="display: none;" id="hidden-input-container">
+                                    <input type="text" name="reason" id="declineReason" class="form-control required" placeholder="Provide reason for declining" required>
+                                </div>
+                            </div>
+
+<!--                            <div class="step" id="step-2">-->
+<!--                                <h3 class="main_question"><strong>2/2</strong>Select An Applicable Reason?</h3>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="container_check version_2">Busy-->
+<!--                                        <input type="radio" name="response" value="Busy" class="required" onchange="getVals(this, 'response');">-->
+<!--                                        <span class="checkmark"></span>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="container_check version_2">Out Of Office-->
+<!--                                        <input type="radio" name="response" value="Out Of Office" class="required" onchange="getVals(this, 'response');">-->
+<!--                                        <span class="checkmark"></span>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                                <div class="form-group">-->
+<!--                                    <label class="container_check version_2">Other-->
+<!--                                        <input type="radio" name="response" value="Other" class="required" onchange="getVals(this, 'response');">-->
+<!--                                        <span class="checkmark"></span>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                        </div>
+
+                        <div id="bottom-wizard">
+<!--                            <button type="button" name="backward" class="backward">Prev</button>-->
+<!--                            <button type="button" name="forward" class="forward">Next</button>-->
+                            <button type="submit" name="process" class="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common_scripts.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/velocity.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/functions.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/survey_func.js') }}"></script>
+
+    <!-- Custom Script -->
+    <script>
+       function toggleHiddenInput() {
+            const declineRadio = document.getElementById('decline');
+            const hiddenInputContainer = document.getElementById('hidden-input-container');
+
+            // Show the hidden input if "Decline" is selected, otherwise hide it
+            if (declineRadio.checked) {
+                hiddenInputContainer.style.display = 'block';
+            } else {
+                hiddenInputContainer.style.display = 'none';
+            }
+        }
+
+        $(document).ready(function () {
+
+            $("#wrapped").on("submit", function (event) {
+                event.preventDefault();
+
+                 const pathParts = window.location.pathname.split('/');
+                const id = pathParts[pathParts.length - 1];
+
+                if (!id) {
+                    alert('Visit ID not found in URL.');
+                    return;
+                }
+
+                console.log('Extracted ID:', id);
+                var declineReason = $('#declineReason').val().trim();
+                var visitData = {
+                    status: $('input[name="status"]:checked').val(),
+                    response: declineReason.length > 0 ? declineReason : 'Accepted'
+                };
+
+                console.log('Sending data:', visitData);
+
+                // Ensure that the URL uses the extracted ID if necessary
+                $.ajax({
+                    url: `/update-visit/${id}`, // Use the ID in the URL
+                    type: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(visitData),
+                    success: function (response) {
+                        alert("Visit data submitted successfully!");
+                        $("#wrapped")[0].reset();
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        alert("An error occurred: " + xhr.responseText);
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
+
 </html>

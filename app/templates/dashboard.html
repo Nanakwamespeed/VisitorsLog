@@ -1,10 +1,314 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html class="no-js" lang="">
+
+
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <!-- Meta Data -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Visit Log</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Dependencies CSS -->
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/fontawesome/css/all.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/flaticon/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/css/jquery-jvectormap-2.0.3.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/fullcalendar/main.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/select2/css/select2.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap-colorpicker/bootstrap-colorpicker.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/flatpicker/css/flatpickr.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/quill/quill.core.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/quill/quill.snow.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/meanmenu/css/meanmenu.min.css" type="text/css">
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/datatables/css/jquery.dataTables.min.css" type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/assets/css/app.css" type="text/css">
+
+    <!-- Switcher Only -->
+    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/switcher/css/switcher.css" id="switcher-css" type="text/css" media="all">
+
+    <!-- Google Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&amp;display=swap" rel="stylesheet">
 </head>
+
+<style>
+    .bg-yellow {
+    background-color: yellow;
+}
+
+.text-dark {
+    color: black;
+}
+
+.bg-red {
+    background-color: red;
+}
+
+.text-light {
+    color: white;
+}
+
+.bg-default {
+    background-color: gray;
+}
+
+.text-secondary {
+    color: #6c757d;
+}
+</style>
+
 <body>
-$END$
+    <!--[if IE]>
+	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+	<![endif]-->
+    <!-- Page Loader Start -->
+    <div id="preloader" class="preloader-wrap">
+        <div class="preloader-content">
+            <figure class="preloader-logo">
+                <img src="https://affixtheme.com/html/dashy/demo/media/logo.png" alt="Logo">
+            </figure>
+            <div class="preloader-text">Dashy</div>
+        </div>
+    </div>
+    <!-- Page Loader End -->
+    <a href="#main-wrapper" data-type="section-switch" class="scrollup">
+        <i class="fas fa-angle-double-up"></i>
+    </a>
+    <div id="main-wrapper" class="dsy-main-wrapper">
+        <div class="dsy-page">
+
+            <div class="dsy-page-content horizontal-menu">
+                <header class="header">
+                    <div class="navbar navbar-expand nav-top-bar2">
+                        <div class="container">
+
+                        </div>
+                    </div>
+                    <div class="header-menu" id="header-menu">
+                        <div class="container">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-md-2">
+                                    <div class="logo-area">
+                                        <a href="index.html" class="temp-logo">
+                                            <img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="logo" class="img-fluid" style="height: 40px;">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-md-10 position-static d-flex justify-content-end">
+                                    <nav id="dropdown" class="template-main-menu">
+                                        <ul>
+                                            <li>
+                                                <a href="#"><i class="flaticon-null-1"></i>Dashboards</a>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="breadcrumbs-wrap">
+                    <div class="container">
+                        <div class="row align-items-center">
+                            <div class="col-sm-4 col-12">
+                                <div class="breadcrumbs-area">
+                                    <h1>Visit Logs</h1>
+                                </div>
+                            </div>
+                            <div class="col-sm-8 col-12">
+                                <div class="breadcrumbs-area text-sm-right">
+                                    <ul>
+                                        <li>
+                                            <a href="#">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Visits</a>
+                                        </li>
+                                        <li>Table</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--=====================================-->
+                <!--=         	Button Area Start         =-->
+                <!--=====================================-->
+                <div class="container">
+    <div class="card component-table">
+        <div class="card-body">
+            <h3 class="text-body text-center text-md-left text-22 text-bold mb-4">Visits</h3>
+            <div class="table-responsive">
+                <table id="data-table" class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>STAFF NAME</th>
+                            <th>ENTRY TIME</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for visit in visits %}
+                        <tr>
+                            <td>{{ visit.full_name }}</td>
+                            <td>{{ visit.email }}</td>
+                            <td>{{ visit.phone }}</td>
+                            <td>{{ visit.staff_name }}</td>
+                            <td>{{ visit.entry_time }}</td>
+                            <td><span class="badge {% if visit.status == 'Pending' %}bg-pink text-mandy{% elif visit.status == 'Accept' %}bg-yellow text-dark{% elif visit.status == 'Cancelled' %}bg-red text-light{% else %}bg-default text-secondary{% endif %}">
+                                    {{ visit.status }}
+                                </span>
+                            </td>zui90-=AZsdxcfgvhbjk'//
+                            <td>
+                                <a href="#" class="{% if visit.status == 'Exited' or visit.status == 'Cancelled' %}hidden{% endif %} item-btn" data-id="{{ visit.id }}" onclick="handleDetailsClick(event)">Exit</a>
+                                <a href="#" class="{% if visit.status == 'Exited' or visit.status == 'Cancelled' %}hidden{% endif %} item-btn" data-id="{{ visit.id }}" onclick="handleCancelClick(event)">Cancel</a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>PHONE</th>
+                            <th>STAFF NAME</th>
+                            <th>ENTRY TIME</th>
+                            <th>STATUS</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </div>
+    <div class="demo_changer">
+
+</div>
+    <!-- Dependencies Js -->
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jquery/js/jquery.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/popper.js/js/popper.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/chart.js/js/Chart.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/apexchart/apexcharts.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/apexchart/irregular-data-series.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/apexchart/ohlc.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/jquery-jvectormap-world-mill.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/jquery-jvectormap-us-aea.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/gdp-data.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/fullcalendar/main.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/select2/js/select2.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/flatpicker/js/flatpickr.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/quill/quill.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/meanmenu/js/jquery.meanmenu.min.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/assets/js/chart.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/assets/js/apex-chart.js"></script>
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/datatables/js/jquery.dataTables.min.js"></script>
+
+    <!-- Preloader Js -->
+    <script src="https://affixtheme.com/html/dashy/demo/dependencies/imagesloaded/imagesloaded.pkgd.min.js"></script>
+
+    <!-- Custom Js -->
+    <script src="https://affixtheme.com/html/dashy/demo/assets/js/app.js"></script>
+
+    <!-- Switcher -->
+    <script src="https://affixtheme.com/html/dashy/demo/switcher/js/switcher.js"></script>
+
+    <script>var page_name = "data-table.html";</script>
+
+<script>
+    function handleDetailsClick(event) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        // Get the ID from the data-id attribute
+        var visitId = event.target.getAttribute('data-id');
+
+        // Define the URL for your endpoint
+        var endpointUrl = '/update-visit/' + visitId;  // Adjust URL if necessary
+
+        // Prepare data to send (example data; adjust as needed)
+        var dataToSend = {
+            exit_time: new Date().toISOString(),
+            status: "Exited"
+        };
+
+        // Make the PUT request
+        fetch(endpointUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle the response data
+            // For example, show a success message or update the UI
+            alert('Visit updated successfully');
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle any errors
+            alert('Failed to update visit');
+        });
+    }
+
+    function handleCancelClick(event) {
+        event.preventDefault(); // Prevent the default link behavior
+
+        // Get the ID from the data-id attribute
+        var visitId = event.target.getAttribute('data-id');
+
+        // Define the URL for your endpoint
+        var endpointUrl = '/update-visit/' + visitId;  // Adjust URL if necessary
+
+        // Prepare data to send (example data; adjust as needed)
+        var dataToSend = {
+            exit_time: new Date().toISOString(),
+            status: "Cancelled"
+        };
+
+        // Make the PUT request
+        fetch(endpointUrl, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+            // Handle the response data
+            // For example, show a success message or update the UI
+            alert('Visit updated successfully');
+            window.location.reload();
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            // Handle any errors
+            alert('Failed to update visit');
+        });
+    }
+</script>
+
 </body>
+
 </html>

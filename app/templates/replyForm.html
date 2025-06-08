@@ -15,9 +15,33 @@
     <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/vendor.css') }}" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
     <!-- MODERNIZR MENU -->
     <script src="{{ url_for('static', filename='js/modernizr.js') }}"></script>
 </head>
+
+<style>
+    .content-left {
+      background-image: url(https://images.unsplash.com/photo-1705909773284-bcbbad9a4023?q=80&w=3272&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 0;
+    }
+</style>
+
+<style>
+    /* Custom CSS to adjust the position of the time picker */
+    .flatpickr-calendar {
+        display: flex;
+        flex-direction: column;
+    }
+    .flatpickr-time {
+        order: -1; /* Move the time picker to the top */
+        margin-bottom: 10px;
+    }
+</style>
 
 <body>
     <div id="preloader">
@@ -28,11 +52,11 @@
         <div class="row row-height">
             <div class="col-lg-6 content-left">
                 <div class="content-left-wrapper">
-                    <a href="index.html" id="logo"><img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="" width="49" height="45"></a>
+<!--                    <a href="index.html" id="logo"><img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="" width="49" height="45"></a>-->
                     <div>
-                        <figure><img src="img/info_graphic_1.svg" alt="" class="img-fluid"></figure>
+                        <figure><img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="" class="img-fluid" style="height: 150px;"></figure>
                         <h2>Visit Logs</h2>
-                        <p>You are welcome to Ghana Link Network Service</p>
+                        <p>There is a guest awaiting your response</p>
                     </div>
                 </div>
                 <!-- /content-left-wrapper -->
@@ -58,13 +82,23 @@
                                     </label>
                                 </div>
                                 <div class="form-group">
+                                    <label class="container_radio version_2">Reschedule
+                                        <input type="radio" name="status" id="reschedule" value="Reschedule" class="required" onchange="getVals(this, 'status'); toggleHiddenInput();">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="form-group">
                                     <label class="container_radio version_2">Decline
                                         <input type="radio" name="status" id="decline" value="Decline" class="required" onchange="getVals(this, 'status'); toggleHiddenInput();">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
                                 <div class="form-group" style="display: none;" id="hidden-input-container">
-                                    <input type="text" name="reason" id="declineReason" class="form-control required" placeholder="Provide reason for declining" required>
+                                    <input type="text" name="reason" id="declineReason" class="form-control required" placeholder="Provide reason for declining" >
+                                </div>
+                                <div class="form-group" id="reschedule-date-picker" style="display: none;">
+                                    <label for="reschedule_date">Select new date and time:</label>
+                                    <input type="datetime-local" id="reschedule_date" name="reschedule_date" placeholder="select date and time" class="form-control required" onchange="getVals(this, 'reschedule_date')" min="">
                                 </div>
                             </div>
 
@@ -110,10 +144,30 @@
     <script src="{{ url_for('static', filename='js/functions.js') }}"></script>
 
     <script src="{{ url_for('static', filename='js/survey_func.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- Custom Script -->
     <script>
+
+        flatpickr("#reschedule_date", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            minDate: "today" // Restrict to today and future dates
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            var today = new Date();
+            var todayStr = today.toISOString().slice(0, 16); // Get the current date and time in the format YYYY-MM-DDTHH:MM
+
+            var rescheduleDateInput = document.getElementById('reschedule_date');
+            if (rescheduleDateInput) {
+                rescheduleDateInput.min = todayStr;
+            }
+        });
+
        function toggleHiddenInput() {
+            const rescheduleRadio = document.getElementById('reschedule');
+            const rescheduleDatePicker = document.getElementById('reschedule-date-picker');
             const declineRadio = document.getElementById('decline');
             const hiddenInputContainer = document.getElementById('hidden-input-container');
 
@@ -123,6 +177,18 @@
             } else {
                 hiddenInputContainer.style.display = 'none';
             }
+
+            if (rescheduleRadio.checked) {
+                rescheduleDatePicker.style.display = 'block';
+            } else {
+                rescheduleDatePicker.style.display = 'none';
+            }
+        }
+
+        function getVals(element, fieldName) {
+            if (fieldName === 'reschedule_date') {
+                console.log('Rescheduled Date:', element.value);
+            }
         }
 
         $(document).ready(function () {
@@ -130,7 +196,7 @@
             $("#wrapped").on("submit", function (event) {
                 event.preventDefault();
 
-                 const pathParts = window.location.pathname.split('/');
+                const pathParts = window.location.pathname.split('/');
                 const id = pathParts[pathParts.length - 1];
 
                 if (!id) {
@@ -139,10 +205,21 @@
                 }
 
                 console.log('Extracted ID:', id);
+                var rescheduleResponse = $('#reschedule').val().trim();
+                var rescheduleDate = $('#reschedule_date').val();
+                console.log("THIS IS THE DATE: " + $('#reschedule_date').val());
                 var declineReason = $('#declineReason').val().trim();
+                var reply_response = "";
+                if(declineReason.length > 0){
+                    var reply_response = declineReason;
+                }
+                if(rescheduleResponse.length > 0){
+                    var reply_response = "rescheduled";
+                }
                 var visitData = {
                     status: $('input[name="status"]:checked').val(),
-                    response: declineReason.length > 0 ? declineReason : 'Accepted'
+                    reschedule_date: rescheduleDate,
+                    response: reply_response
                 };
 
                 console.log('Sending data:', visitData);
@@ -156,7 +233,8 @@
                     success: function (response) {
                         alert("Visit data submitted successfully!");
                         $("#wrapped")[0].reset();
-                        window.location.reload();
+                         window.location.href = '/thank-you';
+<!--                        window.location.reload();-->
                     },
                     error: function (xhr, status, error) {
                         alert("An error occurred: " + xhr.responseText);

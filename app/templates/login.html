@@ -4,8 +4,10 @@
     <head>
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Kwame Krah">
         <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png">
         <link rel="icon" type="image/png" href="../../../assets/img/favicon.png">
+         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
         <title>
             Visitors Logs
         </title>
@@ -23,59 +25,77 @@
 
     </head>
 
+    <style>
+        .bg-gradient-primary{
+        background-image: linear-gradient(310deg,#E4003A,#a00029);
+        }
+    </style>
+
     <body>
 
-        <main class="main-content  mt-0">
-            <section>
-                <div class="page-header min-vh-100">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
-                                <div class="card card-plain">
-                                    <div class="card-header pb-0 text-start">
-                                        <h4 class="font-weight-bolder">Sign In</h4>
-                                        <p class="mb-0">Enter your email and password to sign in</p>
-                                    </div>
-                                    <div class="card-body">
-                                        <form role="form">
-                                            <div class="mb-3">
-                                                <input type="email" class="form-control form-control-lg" placeholder="Email"
-                                                       aria-label="Email">
-                                            </div>
-                                            <div class="mb-3">
-                                                <input type="email" class="form-control form-control-lg" placeholder="Password"
-                                                       aria-label="Password">
-                                            </div>
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="rememberMe">
-                                                <label class="form-check-label" for="rememberMe">Remember me</label>
-                                            </div>
-                                            <div class="text-center">
-                                                <button type="button"
-                                                        class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign in
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+        <main class="main-content mt-0">
+        <section>
+            <div class="page-header min-vh-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
+                            <div class="card card-plain">
+                                <div class="card-header pb-0 text-start">
+                                    <h4 class="font-weight-bolder">Sign In</h4>
+                                    <p class="mb-0">Enter your email and password to sign in</p>
+                                </div>
+                                <div class="card-body">
+                                    <form id="login-form">
+                                        <div class="mb-3">
+                                            <input type="email" id="email" class="form-control form-control-lg" placeholder="Email" required aria-label="Email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <input type="password" id="password" class="form-control form-control-lg" placeholder="Password" required aria-label="Password">
+                                        </div>
+<!--                                        <div class="form-check form-switch">-->
+<!--                                            <input class="form-check-input" type="checkbox" id="rememberMe">-->
+<!--                                            <label class="form-check-label" for="rememberMe">Remember me</label>-->
+<!--                                        </div>-->
+                                        <div class="text-center">
+                                            <button type="submit" class="submit btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-                                <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
-                                    <div class="position-relative">
-                                        <img class="max-width-500 position-relative z-index-2"
-                                             src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png"
-                                             style="height: 150px;"
-                                             alt="chat-img">
-                                    </div>
-                                    <h4 class="mt-5 text-white font-weight-bolder">"Ghana Link Network Services Visitors Log"</h4>
-                                    <p class="text-white">TWelcome to the visitors logging system.</p>
+                        </div>
+                        <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+                            <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                                <div class="position-relative">
+                                    <img class="max-width-500 position-relative z-index-2"
+                                         src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png"
+                                         style="height: 150px;"
+                                         alt="chat-img">
                                 </div>
+                                <h4 class="mt-5 text-white font-weight-bolder">Ghana Link Network Services Visitors Log</h4>
+                                <p class="text-white">Welcome to the visitors logging system.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
+            </div>
+        </section>
+
+        <footer class="footer pt-3  ">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-lg-between">
+                    <div class="col-lg-6 mb-lg-0 mb-4">
+                        <div class="copyright text-center text-sm text-muted text-lg-start">
+                        © <script>
+                                          document.write(new Date().getFullYear())
+                                        </script>,
+                        made with <i class="fa fa-heart"></i> by
+                        <a href="#" class="font-weight-bold" target="_blank">Kwame Krah</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
 
         <script src="{{ url_for('static', filename='dashboard/js/core/popper.min.js') }}"></script>
         <script src="{{ url_for('static', filename='dashboard/js/core/bootstrap.min.js') }}"></script>
@@ -88,6 +108,55 @@
         <script async defer src="https://buttons.github.io/buttons.js"></script>
 
         <script src="{{ url_for('static', filename='dashboard/js/soft-ui-dashboard.min3f71.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('login-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Gather form data
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Prepare data to send
+                const data = {
+                    email: email,
+                    password: password
+                };
+
+                // Make the POST request
+                fetch('{{ url_for("login") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 200) {
+                        // Handle successful login (e.g., redirect to dashboard)
+<!--                        alert(data.message);-->
+                        const userRole = data.role;
+                        console.log("THIS IS THE ROLE: ",  userRole);
+                        if (userRole === "receptionist"){
+                            window.location.href = '/visit-logs';
+                        } else {
+                            window.location.href = '/dashboard';
+                        }
+
+                    } else {
+                        // Handle login failure (e.g., show an error message)
+                        alert('Login failed: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            });
+        });
+    </script>
     </body>
 
 </html>

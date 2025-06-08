@@ -1,28 +1,61 @@
-<!-- templates/email_template.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 600px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h3 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            margin: 0 0 10px 0;
+        }
         .btn {
             display: inline-block;
             padding: 10px 20px;
             font-size: 16px;
-            color: #fff;
-            background-color: #007bff;
+            color: #ffffff!important;
+            background-color: #daed90;
             border-radius: 5px;
             text-decoration: none;
             margin: 10px;
+            text-align: center;
         }
         .btn-secondary {
             background-color: #6c757d;
         }
+        .btn:hover {
+            background-color: #e1f1a8;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
-    <h3>{{ title }}</h3>
-    <p>{{ body }}</p>
-    <a href="{{ link1_url }}" class="btn">Respond</a>
+    <div class="container">
+        <h3>{{ title }}</h3>
+        <div>{{ body|safe }}</div>
+        <a href="{{ accept_url }}" onclick="hideButtons()" class="btn">Accept</a>
+        <a href="{{ decline_url }}" onclick="hideButtons()" class="btn btn-secondary">Decline</a>
+    </div>
 </body>
 </html>

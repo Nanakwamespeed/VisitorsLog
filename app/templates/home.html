@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Kwame Krah">
+    <title>Reception</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="{{ url_for('static', filename='css/home/home.css') }}" rel="stylesheet"/>
+<!--    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">-->
+
+</head>
+<body>
+    <div class="background">
+        <img src="{{ url_for('static', filename='images/home/circle 1.svg') }}" class="shape shape1" style="top: 10%; left: 10%;">
+        <img src="{{ url_for('static', filename='images/home/Square.svg') }}" class="shape shape2" style="top: 25%; left: -15%;">
+        <img src="{{ url_for('static', filename='images/home/triangle.svg') }}" class="shape shape3" style="top: 5%; left: 70%;">
+        <img src="{{ url_for('static', filename='images/home/box.svg') }}" class="shape shape4" style="top: 70%; left: 70%;">
+        <img src="{{ url_for('static', filename='images/home/circle 2.svg') }}" class="shape shape5" style="top: 70%; left: 75%;">
+        <img src="{{ url_for('static', filename='images/home/rectangle.svg') }}" class="shape shape6" style="top: 25%; left: 93%;">
+        <img src="{{ url_for('static', filename='images/home/semi cirlce.svg') }}" class="shape shape7" style="top: 80%; left: 10%;">
+    </div>
+    <div class="step active" id="step-welcome">
+        <div class="interraction">
+            <div class="left">
+                <div class="dropdown">
+                    <button class="dropbtn" id="dropdownButton" onclick="toggleDropdown()">
+                        <img src="{{ url_for('static', filename='images/home/English.svg') }}" alt="Default" class="default-img">English
+                    </button>
+                    <div class="dropdown-content" id="myDropdown">
+                        <a onclick="selectOption('English', '{{ url_for('static', filename='images/home/English.svg') }}', 'en'); return false;"><img src="{{ url_for('static', filename='images/home/English.svg') }}" alt="Link 1" class="default-img">English</a>
+                        <a onclick="selectOption('Français', '{{ url_for('static', filename='images/home/French.svg') }}', 'fr'); return false;"><img src="{{ url_for('static', filename='images/home/French.svg') }}" alt="Link 2" class="default-img">Français</a>
+                        <a onclick="selectOption('Español', '{{ url_for('static', filename='images/home/Spanish.svg') }}', 'es'); return false;"><img src="{{ url_for('static', filename='images/home/Spanish.svg') }}" alt="Link 3" class="default-img">Español</a>
+                    </div>
+                </div>
+                <div style="display: flex; align-content: center; color: #005BBF; font-weight: 500; margin-left: 30px;margin-bottom: 30px;">
+                    <img src="{{ url_for('static', filename='images/home/pin.svg') }}" class="pin">
+                    <div style="display: inline; font-size: 16px;">East Legon</div>
+                </div>
+            </div>
+            <div class="center">
+                <div class="akwaaba">
+                    <img src="{{ url_for('static', filename='images/home/Akwaaba1.svg') }}" class="akwaaba">
+                </div>
+                <div class="container" style="left: 20%; bottom: 10%; font-weight: 500;">
+                    <div>
+                        <p id="touch">Complete your visit sign up in a few simple steps</p>
+                        <button onclick="showStep('step-options')" style="border-radius: 5px; color: white!important;" id="getStarted">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="logo-container">
+                    <img src="{{ url_for('static', filename='images/home/logo.svg') }}" style="height: 50px; margin-right: 5px;">
+                    <div class="display:flex; flex-direction:column;">
+                        <p style="margin: 0; text-align: left; font-size:16px; font-weight: 500;">Ghana Link </p>
+                        <p style="margin: 0; text-align: left; font-size:16px; font-weight: 500;">Network Services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step" id="step-options">
+        <button class="back-btn" onclick="showStep('step-welcome')">
+            <img src="{{ url_for('static', filename='images/home/back.svg') }}" style="height: 12px; margin-right: 5px;"/>
+            <div id="back" style="display: inline-block;">
+                Back
+            </div>
+        </button>
+        <div class="rectangle">
+            <input type="hidden" id="selected-option" name="selected_option">
+            <h1 id="title">What brings you here today?</h1>
+            <div class="options-grid">
+                <div class="option-card" data-option="Visit Employee" onclick="handleOptionClick('step-info', this)">
+                    <img src="{{ url_for('static', filename='images/home/Group_fill.svg') }}" alt="Visit Employee" class="default">
+                    <img src="{{ url_for('static', filename='images/home/Group_fill2.svg') }}" alt="Visit Employee Hover" class="hover">
+                    <p id="visit">Visit Employee</p>
+                </div>
+                <div class="option-card" data-option="Package Delivery" onclick="handleOptionClick('step-info', this)">
+                    <img src="{{ url_for('static', filename='images/home/Delivery.svg') }}" alt="Package Delivery" class="default">
+                    <img src="{{ url_for('static', filename='images/home/Delivery2.svg') }}" alt="Package Delivery Hover" class="hover">
+                    <p id="delivery">Package Delivery</p>
+                </div>
+                <div class="option-card" data-option="Appointment" onclick="handleOptionClick('step-info', this)">
+                    <img src="{{ url_for('static', filename='images/home/Appointment.svg') }}" alt="Appointment" class="default">
+                    <img src="{{ url_for('static', filename='images/home/Appointment2.svg') }}" alt="Appointment Hover" class="hover">
+                    <p id="appointment">Appointment</p>
+                </div>
+                <div class="option-card" data-option="Provide Service" onclick="handleOptionClick('step-info', this)">
+                    <img src="{{ url_for('static', filename='images/home/services.svg') }}" alt="Provide Service" class="default">
+                    <img src="{{ url_for('static', filename='images/home/services2.svg') }}" alt="Provide Service Hover" class="hover">
+                    <p id="service">Provide Service</p>
+                </div>
+                <div class="option-card" data-option="Facility Tour" onclick="handleOptionClick('step-info', this)">
+                    <img src="{{ url_for('static', filename='images/home/Facility.svg') }}" alt="Facility Tour" class="default">
+                    <img src="{{ url_for('static', filename='images/home/Facility2.svg') }}" alt="Facility Tour Hover" class="hover">
+                    <p id="tour">Facility Tour</p>
+                </div>
+                <div class="option-card" data-option="Specify" onclick="handleOptionClick('step-info', this)">
+                    <img src="{{ url_for('static', filename='images/home/Specify.svg') }}" alt="Specify" class="default">
+                    <img src="{{ url_for('static', filename='images/home/Specify2.svg') }}" alt="Specify Hover" class="hover">
+                    <p id="specify">Specify</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step" id="step-info">
+        <button class="back-btn" onclick="showStep('step-options')">
+            <img src="{{ url_for('static', filename='images/home/back.svg') }}" style="height: 12px; margin-right: 5px;">
+            <div id="back2" style="display: inline-block;">
+                Back
+            </div>
+        </button>
+        <h1 id="form-title">Tell us about yourself.</h1>
+        <div class="rectangle-blurx">
+            <div class="capture-group">
+                <div style="display: flex; justify-content: start;">
+                    <label for="form-group picture-box" id="picture">Take a picture
+                        <span style="color: #ff4f4f;">*</span>
+                    </label>
+                </div>
+                <div class="form-group picture-box">
+                    <video id="video" autoplay></video>
+                    <canvas id="canvas" style="display: none;"></canvas>
+                </div>
+                <button id="capture-button" class="capture-button">
+                    Capture</button>
+            </div>
+            <div style="background-color: #d8d8d8; height: 450px; width: 1px;margin-left: 50px; margin-right: 50px;">ㅤ
+            </div>
+            <div>
+                <div class="form-group">
+                    <div for="full-name" id="your-name">Full name <span style="color: #ff4f4f;">*</span></div>
+                    <input type="text" id="full-name" placeholder="Eg. John Doe" required>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <input type="radio" name="contact-method" value="email" id="email" checked>Email
+                        <input type="radio" name="contact-method" value="phone">
+                        <span id="phone">Phone number</span>
+                        <span style="color: #ff4f4f;">*</span>
+                    </div>
+                    <input type="text" id="contact" placeholder="johndoe@gmail.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="staff" id="employee">Staff <span style="color: #ff4f4f;">*</span></label>
+                    <input type="text" id="staff" placeholder="Who are you here to visit?" autocomplete="off" required>
+                    <div id="staff-list" class="dropdown-list"></div>
+                </div>
+                <div class="form-group" id="reason-group">
+                    <div>Reason<span style="color: #ff4f4f;">*</span></div>
+                    <input type="text" id="specify-reason" placeholder="your reason" required>
+                </div>
+                <div class="form-group flex">
+                    <div class="multiple-label-button">
+                        <span><input type="checkbox" id="multiple"></span>
+                    <label for="multiple" id="many">We are multiple individuals</label>
+                    </div>
+
+                    <div class="counter-container" id="counter-container" style="background-color: #F2F2F2">
+                        <button class="counter-button-decrease" id="decrease">-</button>
+                        <div class="counter-display" id="counter">2</div>
+                        <button class="counter-button-increase" id="increase">+</button>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="cancel" id="cancel-button">Cancel</button>
+                    <button class="proceed" id="proceed-button">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="step" id="step-thankyou">
+      <div class="rectangle-blur">
+          <div>
+            <div><img src="{{ url_for('static', filename='images/check.png') }}" alt=""></div>
+            <h1 id="about">Submitted <br> Successfully</h1>
+            <div style="margin-bottom: 15px;">please wait for a response from the reception</div>
+            <p id="countdownDisplay">0<span id="countdown">05s</span></p>
+            <button id="Home" onclick="backHome()" style="border-radius: 5px; color: white!important;">Back to home</button>
+          </div>
+      </div>
+  </div>
+
+    <div id="loader" style="display: none;">
+      <div class="spinner"></div>
+    </div>
+
+<!--    <footer style="background-color: #f4f5f6; padding: 20px 0; text-align: center; color: #9a9ea6; font-size: 16px;">-->
+<!--        <p style="margin: 0;">&copy; 2024 Kwame Krah All rights reserved.</p>-->
+<!--        <p style="margin: 0;">123 Your Street, Your City, Your Country</p>-->
+<!--    </footer>-->
+
+<script src="{{ url_for('static', filename='/js/home/home.js') }}"></script>
+<script>
+    function backHome() {
+        window.location.reload();
+    }
+</script>
+</body>
+</html>

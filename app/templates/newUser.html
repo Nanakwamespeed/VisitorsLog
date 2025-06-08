@@ -1,10 +1,319 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Kwame Krah">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <title>
+        Visitors Log
+    </title>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
+
+    <link href="{{ url_for('static', filename='dashboard/css/nucleo-icons.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='dashboard/css/nucleo-svg.css') }}" rel="stylesheet"/>
+
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='dashboard/css/nucleo-svg.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link id="pagestyle" href="{{ url_for('static', filename='dashboard/css/soft-ui-dashboard.min3f71.css') }}"
+          rel="stylesheet"/>
+
 </head>
-<body>
-$END$
+
+<style>
+    .navbar-vertical .navbar-nav > .nav-item .nav-link.active .icon {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+    }
+
+    .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+      }
+
+    .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a:hover {
+      background-image: linear-gradient(310deg,#E4003A,#a00029)!important;
+    }
+
+    .text-gradient.text-primary {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+    }
+
+    .bg-gradient-primary {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+    }
+</style>
+<body style="height: 100%!important">
+<div class="g-sidenav-show  bg-gray-100" style="height: 100vh!important">
+
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+       id="sidenav-main">
+    <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+           aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href="#" target="_blank">
+            <img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">Visitors Log</span>
+        </a>
+    </div>
+    <hr class="horizontal dark mt-0">
+    <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link"
+                   aria-controls="dashboardsExamples" role="button" aria-expanded="false" href="/visit-logs">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>shop </title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(0.000000, 148.000000)">
+                                            <path class="color-background"
+                                                  d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"
+                                                  opacity="0.598981585"></path>
+                                            <path class="color-background"
+                                                  d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Visitor Logs</span>
+                </a>
+            </li>
+            {% if session.user_role == "hr" %}
+<!--            <li class="nav-item mt-3">-->
+<!--                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">{{ session.user_role }}</h6>-->
+<!--            </li>-->
+            <li class="nav-item">
+                     <li class="nav-item ">
+                            <a class="nav-link " aria-expanded="false" href="/reports">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal"> Reports <b class="caret"></b></span>
+                            </a>
+                    </li>
+                        <li class="nav-item ">
+                            <a class="nav-link active" data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
+                                <span class="sidenav-mini-icon"> U </span>
+                                <span class="sidenav-normal"> Employees <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse show" id="usersExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="/new-user">
+                                            <span class="sidenav-mini-icon text-xs"> NE </span>
+                                            <span class="sidenav-normal"> New Employee </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="/user-list">
+                                            <span class="sidenav-mini-icon text-xs"> EL </span>
+                                            <span class="sidenav-normal"> Employee List </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="/logout">
+                                <span class="sidenav-mini-icon text-xs"> L </span>
+                                <span class="sidenav-normal"> Log Out </span>
+                            </a>
+                        </li>
+            {% endif %}
+
+        </ul>
+    </div>
+</aside>
+<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+    <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky"
+         id="navbarBlur" data-scroll="true">
+        <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                    <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Visitors Logs</li>
+                </ol>
+                <h6 class="font-weight-bolder mb-0">Add User</h6>
+            </nav>
+            <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+                <a href="javascript:;" class="nav-link text-body p-0">
+                    <div class="sidenav-toggler-inner">
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="multisteps-form mb-5">
+
+<!--                    <div class="row">-->
+<!--                        <div class="col-12 col-lg-8 mx-auto my-5">-->
+<!--                            <div class="multisteps-form__progress">-->
+<!--                                <button class="multisteps-form__progress-btn js-active" type="button" title="User Info">-->
+<!--                                    <span>User Info</span>-->
+<!--                                </button>-->
+<!--                                <button class="multisteps-form__progress-btn" type="button" title="Address">Address-->
+<!--                                </button>-->
+<!--                                <button class="multisteps-form__progress-btn" type="button" title="Socials">Socials-->
+<!--                                </button>-->
+<!--                                <button class="multisteps-form__progress-btn" type="button" title="Profile">Profile-->
+<!--                                </button>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+                    <div class="row">
+                        <div class="col-12 col-lg-8 m-auto">
+                            <form class="multisteps-form__form mb-8" id="user-form">
+                                <div id="session-data" data-user-id="{{ session.user_id }}"></div>
+                                <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active"
+                                     data-animation="FadeIn">
+                                    <h5 class="font-weight-bolder mb-0">About Staff</h5>
+                                    <p class="mb-0 text-sm">Mandatory informations</p>
+                                    <div class="multisteps-form__content">
+                                        <div class="row mt-3">
+                                            <div class="col-12 col-sm-6">
+                                                <label>First Name *</label>
+                                                <input class="multisteps-form__input form-control required" name="first_name" id="first_name" type="text"
+                                                       placeholder="enter first name" required/>
+                                            </div>
+                                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                                <label>Last Name</label>
+                                                <input class="multisteps-form__input form-control required" name="last_name" id="last_name" type="text"
+                                                       placeholder="enter last name" required/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12 col-sm-6">
+                                                <label>Phone</label>
+                                                <input class="multisteps-form__input form-control required" name="phone" id="phone" type="tel"
+                                                       placeholder="eg. 0201111111" required/>
+                                            </div>
+                                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                                <label>Email Address</label>
+                                                <input class="multisteps-form__input form-control required" name="email" id="email" type="email"
+                                                       placeholder="eg. name@gmail.com" required/>
+                                            </div>
+                                        </div>
+                                        <div class="row mt-3">
+                                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                                <label>Role</label>
+                                                <select class="form-control required" name="role" id="role" required>
+                                                    <option value="" disabled selected>Select role</option>
+                                                    <option value="1">Receptionist</option>
+                                                    <option value="2">HR</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <label>Password</label>
+                                                <input class="multisteps-form__input form-control required" name="password" id="password" type="password"
+                                                       placeholder="enter password" required/>
+                                            </div>
+                                            <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                                                <label>Repeat Password</label>
+                                                <input class="multisteps-form__input form-control required" type="password"
+                                                      id="confirm_password"  placeholder="confirm password" required/>
+                                            </div>
+                                        </div>
+                                        <div class="button-row d-flex mt-4">
+                                            <button class="btn bg-gradient-dark ms-auto mb-0" type="submit" title="Add User">Add User
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</main>
+</div>
+
+<script src="{{ url_for('static', filename='dashboard/js/core/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/smooth-scrollbar.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='dashboard/js/plugins/dragula/dragula.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/jkanban/jkanban.js') }}"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='dashboard/js/soft-ui-dashboard.min3f71.js') }}"></script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+</script>
+<script>
+    const sessionData = document.getElementById('session-data');
+    const userId = sessionData.getAttribute('data-user-id');
+
+    $(document).ready(function () {
+    console.log("This is the user id: ", userId);
+        $("#user-form").on("submit", function (event) {
+            event.preventDefault();
+
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm_password').value;
+            var the_role = $('select[name="role"]').val();
+
+            if (password !== confirmPassword) {
+                event.preventDefault(); // Prevent form submission
+                alert('Passwords do not match!');
+                return;
+            }
+
+            var userData = {
+                first_name: $('input[name="first_name"]').val(),
+                last_name: $('input[name="last_name"]').val(),
+                phone: $('input[name="phone"]').val(),
+                email: $('input[name="email"]').val(),
+                role_id: the_role,
+                password: $('input[name="password"]').val(),
+                created_by: userId
+            };
+
+
+            // Check if passwords match
+<!--            if (userData.password !== userData.repeat_password) {-->
+<!--                alert('Passwords do not match.');-->
+<!--                return;-->
+<!--            }-->
+
+            $.ajax({
+                url: "/create-user",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(userData),
+                success: function (response) {
+                    alert("User added successfully!");
+                    $("#user-form")[0].reset();
+                     window.location.href = '/user-list';
+                },
+                error: function (xhr, status, error) {
+                    alert("An error occurred: " + xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

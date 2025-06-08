@@ -1,314 +1,647 @@
-<!doctype html>
-<html class="no-js" lang="">
-
-
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <!-- Meta Data -->
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Visit Log</title>
-    <meta name="description" content="">
+    <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Kwame Krah">
+    <link rel="apple-touch-icon" sizes="76x76" href="../../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../../assets/img/favicon.png">
+    <title>
+        Visitors Log
+    </title>
 
-    <!-- Dependencies CSS -->
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/fontawesome/css/all.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/flaticon/flaticon.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/css/jquery-jvectormap-2.0.3.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/fullcalendar/main.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/select2/css/select2.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap-colorpicker/bootstrap-colorpicker.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/flatpicker/css/flatpickr.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/quill/quill.core.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/quill/quill.snow.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/meanmenu/css/meanmenu.min.css" type="text/css">
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/dependencies/datatables/css/jquery.dataTables.min.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet"/>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/assets/css/app.css" type="text/css">
+    <link href="{{ url_for('static', filename='dashboard/css/nucleo-icons.css') }}" rel="stylesheet"/>
+    <link href="{{ url_for('static', filename='dashboard/css/nucleo-svg.css') }}" rel="stylesheet"/>
 
-    <!-- Switcher Only -->
-    <link rel="stylesheet" href="https://affixtheme.com/html/dashy/demo/switcher/css/switcher.css" id="switcher-css" type="text/css" media="all">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="{{ url_for('static', filename='dashboard/css/nucleo-svg.css') }}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-    <!-- Google Web Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400&amp;display=swap" rel="stylesheet">
+    <link id="pagestyle" href="{{ url_for('static', filename='dashboard/css/soft-ui-dashboard.min3f71.css') }}"
+          rel="stylesheet"/>
+
 </head>
 
 <style>
-    .bg-yellow {
-    background-color: yellow;
-}
+    .navbar-vertical .navbar-nav > .nav-item .nav-link.active .icon {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+    }
 
-.text-dark {
-    color: black;
-}
+    .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+      }
 
-.bg-red {
-    background-color: red;
-}
+    .dataTable-wrapper .dataTable-bottom .dataTable-pagination .dataTable-pagination-list .active a:hover {
+      background-image: linear-gradient(310deg,#E4003A,#a00029)!important;
+    }
 
-.text-light {
-    color: white;
-}
+    .text-gradient.text-primary {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+    }
 
-.bg-default {
-    background-color: gray;
-}
-
-.text-secondary {
-    color: #6c757d;
-}
+    .bg-gradient-primary {
+      background-image: linear-gradient(310deg,#E4003A,#a00029);
+    }
 </style>
+<body style="height: 100%!important">
+<div class="g-sidenav-show  bg-gray-100" style="height: 100vh!important">
 
-<body>
-    <!--[if IE]>
-	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-	<![endif]-->
-    <!-- Page Loader Start -->
-    <div id="preloader" class="preloader-wrap">
-        <div class="preloader-content">
-            <figure class="preloader-logo">
-                <img src="https://affixtheme.com/html/dashy/demo/media/logo.png" alt="Logo">
-            </figure>
-            <div class="preloader-text">Dashy</div>
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
+           id="sidenav-main">
+        <div class="sidenav-header">
+            <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
+               aria-hidden="true" id="iconSidenav"></i>
+            <a class="navbar-brand m-0" href="#" target="_blank">
+                <img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png"
+                     class="navbar-brand-img h-100" alt="main_logo">
+                <span class="ms-1 font-weight-bold">Visitors Log</span>
+            </a>
         </div>
-    </div>
-    <!-- Page Loader End -->
-    <a href="#main-wrapper" data-type="section-switch" class="scrollup">
-        <i class="fas fa-angle-double-up"></i>
-    </a>
-    <div id="main-wrapper" class="dsy-main-wrapper">
-        <div class="dsy-page">
-
-            <div class="dsy-page-content horizontal-menu">
-                <header class="header">
-                    <div class="navbar navbar-expand nav-top-bar2">
-                        <div class="container">
-
-                        </div>
+        <hr class="horizontal dark mt-0">
+        <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
+        {% if session.user_role == "hr" %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active"
+                   aria-controls="dashboardsExamples" role="button" aria-expanded="false"  href="/dashboard">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center d-flex align-items-center justify-content-center  me-2">
+                        <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <title>shop </title>
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(0.000000, 148.000000)">
+                                            <path class="color-background"
+                                                  d="M46.7199583,10.7414583 L40.8449583,0.949791667 C40.4909749,0.360605034 39.8540131,0 39.1666667,0 L7.83333333,0 C7.1459869,0 6.50902508,0.360605034 6.15504167,0.949791667 L0.280041667,10.7414583 C0.0969176761,11.0460037 -1.23209662e-05,11.3946378 -1.23209662e-05,11.75 C-0.00758042603,16.0663731 3.48367543,19.5725301 7.80004167,19.5833333 L7.81570833,19.5833333 C9.75003686,19.5882688 11.6168794,18.8726691 13.0522917,17.5760417 C16.0171492,20.2556967 20.5292675,20.2556967 23.494125,17.5760417 C26.4604562,20.2616016 30.9794188,20.2616016 33.94575,17.5760417 C36.2421905,19.6477597 39.5441143,20.1708521 42.3684437,18.9103691 C45.1927731,17.649886 47.0084685,14.8428276 47.0000295,11.75 C47.0000295,11.3946378 46.9030823,11.0460037 46.7199583,10.7414583 Z"
+                                                  opacity="0.598981585"></path>
+                                            <path class="color-background"
+                                                  d="M39.198,22.4912623 C37.3776246,22.4928106 35.5817531,22.0149171 33.951625,21.0951667 L33.92225,21.1107282 C31.1430221,22.6838032 27.9255001,22.9318916 24.9844167,21.7998837 C24.4750389,21.605469 23.9777983,21.3722567 23.4960833,21.1018359 L23.4745417,21.1129513 C20.6961809,22.6871153 17.4786145,22.9344611 14.5386667,21.7998837 C14.029926,21.6054643 13.533337,21.3722507 13.0522917,21.1018359 C11.4250962,22.0190609 9.63246555,22.4947009 7.81570833,22.4912623 C7.16510551,22.4842162 6.51607673,22.4173045 5.875,22.2911849 L5.875,44.7220845 C5.875,45.9498589 6.7517757,46.9451667 7.83333333,46.9451667 L19.5833333,46.9451667 L19.5833333,33.6066734 L27.4166667,33.6066734 L27.4166667,46.9451667 L39.1666667,46.9451667 C40.2482243,46.9451667 41.125,45.9498589 41.125,44.7220845 L41.125,22.2822926 C40.4887822,22.4116582 39.8442868,22.4815492 39.198,22.4912623 Z"></path>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg>
                     </div>
-                    <div class="header-menu" id="header-menu">
-                        <div class="container">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-md-2">
-                                    <div class="logo-area">
-                                        <a href="index.html" class="temp-logo">
-                                            <img src="https://glns.info/wp-content/uploads/2024/04/Ghana-Link-Logos-03.png" alt="logo" class="img-fluid" style="height: 40px;">
+                    <span class="nav-link-text ms-1">Dashboard</span>
+                </a>
+            </li>
+
+<!--            <li class="nav-item mt-3">-->
+<!--                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">{{ session.user_role }}</h6>-->
+<!--            </li>-->
+            <li class="nav-item">
+                    <li class="nav-item ">
+                            <a class="nav-link" aria-expanded="false" href="/visit-logs">
+                                <span class="sidenav-mini-icon"> VL </span>
+                                <span class="sidenav-normal"> Visit Logs <b class="caret"></b></span>
+                            </a>
+                    </li>
+                     <li class="nav-item ">
+                            <a class="nav-link " aria-expanded="false" href="/reports">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal"> Reports <b class="caret"></b></span>
+                            </a>
+                    </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " data-bs-toggle="collapse" aria-expanded="false" href="#usersExample">
+                                <span class="sidenav-mini-icon"> E </span>
+                                <span class="sidenav-normal"> Employees <b class="caret"></b></span>
+                            </a>
+                            <div class="collapse " id="usersExample">
+                                <ul class="nav nav-sm flex-column">
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="/new-user">
+                                            <span class="sidenav-mini-icon text-xs"> NE </span>
+                                            <span class="sidenav-normal"> New Employee </span>
                                         </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link " href="/user-list">
+                                            <span class="sidenav-mini-icon text-xs"> EL </span>
+                                            <span class="sidenav-normal"> Employee List </span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+            <li class="nav-item ">
+                <a class="nav-link " href="/logout">
+                    <span class="sidenav-mini-icon text-xs"> L </span>
+                    <span class="sidenav-normal"> Log Out </span>
+                </a>
+            </li>
+
+        </ul>
+        {% else %}
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                    <li class="nav-item ">
+                            <a class="nav-link active" aria-expanded="false" href="/visit-logs">
+                                <span class="sidenav-mini-icon"> VL </span>
+                                <span class="sidenav-normal"> Visit Logs <b class="caret"></b></span>
+                            </a>
+                    </li>
+
+
+
+            <li class="nav-item ">
+                <a class="nav-link " href="/logout">
+                    <span class="sidenav-mini-icon text-xs"> L </span>
+                    <span class="sidenav-normal"> Log Out </span>
+                </a>
+            </li>
+
+        </ul>
+        {% endif %}
+    </div>
+    </aside>
+    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+
+        <nav class="navbar navbar-main navbar-expand-lg position-sticky mt-4 top-1 px-0 mx-4 shadow-none border-radius-xl z-index-sticky"
+             id="navbarBlur" data-scroll="true">
+            <div class="container-fluid py-1 px-3">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Visitors Logs</li>
+                    </ol>
+                    <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+                </nav>
+                <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
+                    <a href="javascript:;" class="nav-link text-body p-0">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid py-4">
+            <div class="row">
+                <div class="col-lg-6 col-12 d-flex ms-auto">
+                    <a href="javascript:;" class="btn btn-icon btn-outline-secondary ms-auto">
+                        <span class="btn-inner--text">Export</span>
+                        <span class="btn-inner--icon ms-2"><i class="ni ni-folder-17"></i></span>
+                    </a>
+<!--                    <div class="dropleft ms-3">-->
+<!--                        <button class="btn bg-gradient-dark dropdown-toggle" type="button" id="dropdownImport"-->
+<!--                                data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                            Today-->
+<!--                        </button>-->
+<!--                        <ul class="dropdown-menu" aria-labelledby="dropdownImport">-->
+<!--                            <li><a class="dropdown-item" href="javascript:;">Yesterday</a></li>-->
+<!--                            <li><a class="dropdown-item" href="javascript:;">Last 7 days</a></li>-->
+<!--                            <li><a class="dropdown-item" href="javascript:;">Last 30 days</a></li>-->
+<!--                        </ul>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Number Of Employees</p>
+                                        <h5 class="font-weight-bolder mb-0" id="total-users">
+
+                                            <span class="text-success text-sm font-weight-bolder" id="users-change"></span>
+                                        </h5>
                                     </div>
                                 </div>
-                                <div class="col-md-10 position-static d-flex justify-content-end">
-                                    <nav id="dropdown" class="template-main-menu">
-                                        <ul>
-                                            <li>
-                                                <a href="#"><i class="flaticon-null-1"></i>Dashboards</a>
-                                            </li>
-
-                                        </ul>
-                                    </nav>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </header>
-
-                <div class="breadcrumbs-wrap">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-sm-4 col-12">
-                                <div class="breadcrumbs-area">
-                                    <h1>Visit Logs</h1>
-                                </div>
-                            </div>
-                            <div class="col-sm-8 col-12">
-                                <div class="breadcrumbs-area text-sm-right">
-                                    <ul>
-                                        <li>
-                                            <a href="#">Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Visits</a>
-                                        </li>
-                                        <li>Table</li>
-                                    </ul>
+                                <div class="col-4 text-end">
+                                    <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">
+                                        <i class="ni ni-circle-08 text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--=====================================-->
-                <!--=         	Button Area Start         =-->
-                <!--=====================================-->
-                <div class="container">
-    <div class="card component-table">
-        <div class="card-body">
-            <h3 class="text-body text-center text-md-left text-22 text-bold mb-4">Visits</h3>
-            <div class="table-responsive">
-                <table id="data-table" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>NAME</th>
-                            <th>EMAIL</th>
-                            <th>PHONE</th>
-                            <th>STAFF NAME</th>
-                            <th>ENTRY TIME</th>
-                            <th>STATUS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for visit in visits %}
-                        <tr>
-                            <td>{{ visit.full_name }}</td>
-                            <td>{{ visit.email }}</td>
-                            <td>{{ visit.phone }}</td>
-                            <td>{{ visit.staff_name }}</td>
-                            <td>{{ visit.entry_time }}</td>
-                            <td><span class="badge {% if visit.status == 'Pending' %}bg-pink text-mandy{% elif visit.status == 'Accept' %}bg-yellow text-dark{% elif visit.status == 'Cancelled' %}bg-red text-light{% else %}bg-default text-secondary{% endif %}">
-                                    {{ visit.status }}
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Visits</p>
+                                        <h5 class="font-weight-bolder mb-0" id="total-visits">
+
+                                            <span class="text-success text-sm font-weight-bolder" id="visits-change"></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">
+                                        <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-sm-6 mb-xl-0 mb-4">
+                    <div class="card">
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="numbers">
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Average Visits Per Day</p>
+                                        <h5 class="font-weight-bolder mb-0" id="average-visits">
+                                            0
+                                            <span class="text-danger text-sm font-weight-bolder"></span>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="col-4 text-end">
+                                    <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">
+                                        <i class="ni ni-watch-time text-lg opacity-10" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--                <div class="col-xl-3 col-sm-6">-->
+<!--                    <div class="card">-->
+<!--                        <div class="card-body p-3">-->
+<!--                            <div class="row">-->
+<!--                                <div class="col-8">-->
+<!--                                    <div class="numbers">-->
+<!--                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Official Visits</p>-->
+<!--                                        <h5 class="font-weight-bolder mb-0" id="total-official-visits">-->
+<!--                                            0-->
+<!--                                            <span class="text-success text-sm font-weight-bolder"></span>-->
+<!--                                        </h5>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="col-4 text-end">-->
+<!--                                    <div class="icon icon-shape bg-gradient-dark shadow text-center border-radius-md">-->
+<!--                                        <i class="ni ni-image text-lg opacity-10" aria-hidden="true"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-7 col-md-12">
+                    <div class="card">
+                        <div class="card-header pb-0 p-3">
+                            <h6 class="mb-0">Visits Per Month</h6>
+                            <div class="d-flex align-items-center">
+                                <span class="badge badge-md badge-dot me-4">
+                                <i class="bg-primary"></i>
+                                <span class="text-dark text-xs">Visits</span>
                                 </span>
-                            </td>zui90-=AZsdxcfgvhbjk'//
-                            <td>
-                                <a href="#" class="{% if visit.status == 'Exited' or visit.status == 'Cancelled' %}hidden{% endif %} item-btn" data-id="{{ visit.id }}" onclick="handleDetailsClick(event)">Exit</a>
-                                <a href="#" class="{% if visit.status == 'Exited' or visit.status == 'Cancelled' %}hidden{% endif %} item-btn" data-id="{{ visit.id }}" onclick="handleCancelClick(event)">Cancel</a>
-
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>NAME</th>
-                            <th>EMAIL</th>
-                            <th>PHONE</th>
-                            <th>STAFF NAME</th>
-                            <th>ENTRY TIME</th>
-                            <th>STATUS</th>
-                        </tr>
-                    </tfoot>
-                </table>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="chart">
+                                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-12 mt-4 mt-lg-0">
+                    <div class="card h-100">
+                        <div class="card-header pb-0 p-3">
+                            <div class="d-flex align-items-center">
+                                <h6 class="mb-0">Purpose Of Visits</h6>
+                                <button type="button"
+                                        class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-auto"
+                                        data-bs-toggle="tooltip" data-bs-placement="bottom"
+                                        title="See which websites are sending traffic to your website">
+                                    <i class="fas fa-info"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+                            <div class="row">
+                                <div class="col-lg-5 col-12 text-center">
+                                    <div class="chart mt-5">
+                                        <canvas id="chart-doughnut" class="chart-canvas" height="200"></canvas>
+                                    </div>
+<!--                                    <a class="btn btn-sm bg-gradient-secondary mt-4">See all referrals</a>-->
+                                </div>
+                                <div class="col-lg-7 col-12">
+                                    <div class="table-responsive">
+                                        <table class="table align-items-center mb-0">
+                                            <tbody id="referral-table-body">
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
-    </div>
+    </main>
+
 </div>
 
-            </div>
-        </div>
-    </div>
-    <div class="demo_changer">
+<script src="{{ url_for('static', filename='dashboard/js/core/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/core/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/perfect-scrollbar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/smooth-scrollbar.min.js') }}"></script>
+<!--<script src="{{ url_for('static', filename='dashboard/js/plugins/datatables.js') }}"></script>-->
 
-</div>
-    <!-- Dependencies Js -->
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jquery/js/jquery.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/popper.js/js/popper.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/chart.js/js/Chart.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/apexchart/apexcharts.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/apexchart/irregular-data-series.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/apexchart/ohlc.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/jquery-jvectormap-2.0.3.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/jquery-jvectormap-world-mill.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/jquery-jvectormap-us-aea.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/jvectormap/js/gdp-data.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/fullcalendar/main.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/select2/js/select2.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/bootstrap-colorpicker/bootstrap-colorpicker.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/flatpicker/js/flatpickr.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/quill/quill.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/meanmenu/js/jquery.meanmenu.min.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/assets/js/chart.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/assets/js/apex-chart.js"></script>
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/datatables/js/jquery.dataTables.min.js"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/dragula/dragula.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/jkanban/jkanban.js') }}"></script>
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
-    <!-- Preloader Js -->
-    <script src="https://affixtheme.com/html/dashy/demo/dependencies/imagesloaded/imagesloaded.pkgd.min.js"></script>
-
-    <!-- Custom Js -->
-    <script src="https://affixtheme.com/html/dashy/demo/assets/js/app.js"></script>
-
-    <!-- Switcher -->
-    <script src="https://affixtheme.com/html/dashy/demo/switcher/js/switcher.js"></script>
-
-    <script>var page_name = "data-table.html";</script>
+<script src="{{ url_for('static', filename='dashboard/js/soft-ui-dashboard.min3f71.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='dashboard/js/plugins/chartjs.min.js') }}"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 
 <script>
-    function handleDetailsClick(event) {
-        event.preventDefault(); // Prevent the default link behavior
+    $(document).ready(function() {
+    $.ajax({
+        url: "/get-stats",
+        type: "GET",
+        success: function(response) {
+            // Update Total Visits
+            $('#total-visits').text(response.total_visits);
 
-        // Get the ID from the data-id attribute
-        var visitId = event.target.getAttribute('data-id');
+            // Update Total Users
+            $('#total-users').text(response.total_users);
 
-        // Define the URL for your endpoint
-        var endpointUrl = '/update-visit/' + visitId;  // Adjust URL if necessary
+            // Update Average Visits
+            $('#average-visits').text(response.average_visits_per_day.toFixed(0));
 
-        // Prepare data to send (example data; adjust as needed)
-        var dataToSend = {
-            exit_time: new Date().toISOString(),
-            status: "Exited"
-        };
+            // Update Total Official Visits
+            $('#total-official-visits').text(response.official_visits);
 
-        // Make the PUT request
-        fetch(endpointUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataToSend)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            // Handle the response data
-            // For example, show a success message or update the UI
-            alert('Visit updated successfully');
-            window.location.reload();
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            // Handle any errors
-            alert('Failed to update visit');
-        });
-    }
 
-    function handleCancelClick(event) {
-        event.preventDefault(); // Prevent the default link behavior
+            const visitsData = response.visits_data;
+            const purposeData = response.purpose_data;
 
-        // Get the ID from the data-id attribute
-        var visitId = event.target.getAttribute('data-id');
+            // Data for line chart
+            const visitLabels = Object.keys(visitsData);
+            const visitCounts = Object.values(visitsData);
 
-        // Define the URL for your endpoint
-        var endpointUrl = '/update-visit/' + visitId;  // Adjust URL if necessary
+           var ctx1 = document.getElementById("chart-line").getContext("2d");
+           var ctx2 = document.getElementById("chart-doughnut").getContext("2d");
 
-        // Prepare data to send (example data; adjust as needed)
-        var dataToSend = {
-            exit_time: new Date().toISOString(),
-            status: "Cancelled"
-        };
+           var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
-        // Make the PUT request
-        fetch(endpointUrl, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(dataToSend)
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Success:', data);
-            // Handle the response data
-            // For example, show a success message or update the UI
-            alert('Visit updated successfully');
-            window.location.reload();
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            // Handle any errors
-            alert('Failed to update visit');
-        });
+           gradientStroke1.addColorStop(1, 'rgba(203,12,159,0.2)');
+           gradientStroke1.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+           gradientStroke1.addColorStop(0, 'rgba(203,12,159,0)'); //purple colors
+
+           var gradientStroke2 = ctx1.createLinearGradient(0, 230, 0, 50);
+
+           gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
+           gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+           gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
+
+
+            new Chart(ctx1, {
+                type: "line",
+                data: {
+                    labels: visitLabels,
+                    datasets: [{
+                        label: "Number of Visits",
+                        tension: 0.4,
+                        borderWidth: 0,
+                        pointRadius: 2,
+                        pointBackgroundColor: "#cb0c9f",
+                        borderColor: "#cb0c9f",
+                        borderWidth: 3,
+                        backgroundColor: "rgba(203, 12, 159, 0.2)",
+                        data: visitCounts,
+                        maxBarThickness: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: false,
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: true,
+                                padding: 10,
+                                color: '#9ca2b7'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                                display: true,
+                                drawOnChartArea: true,
+                                drawTicks: true,
+                                borderDash: [5, 5]
+                            },
+                            ticks: {
+                                display: true,
+                                color: '#9ca2b7',
+                                padding: 10
+                            }
+                        },
+                    },
+                },
+            });
+
+            // Data for doughnut chart
+            const purposeLabels = Object.keys(purposeData);
+            const purposeCounts = Object.values(purposeData);
+            const colors = ['#2152ff', '#3A416F', '#f53939', '#a8b8d8', '#cb0c9f'];
+
+            new Chart(ctx2, {
+                type: "doughnut",
+                data: {
+                    labels: purposeLabels,
+                    datasets: [{
+                        label: "Visits by Purpose",
+                        weight: 9,
+                        cutout: 60,
+                        tension: 0.9,
+                        pointRadius: 2,
+                        borderWidth: 2,
+                        backgroundColor: colors.slice(0, purposeLabels.length),
+                        data: purposeCounts,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'index',
+                    },
+                    scales: {
+                        y: {
+                            grid: {
+                                drawBorder: false,
+                                display: false,
+                                drawOnChartArea: false,
+                                drawTicks: false,
+                            },
+                            ticks: {
+                                display: false
+                            }
+                        },
+                        x: {
+                            grid: {
+                                drawBorder: false,
+                                display: false,
+                                drawOnChartArea: false,
+                                drawTicks: false,
+                            },
+                            ticks: {
+                                display: false,
+                            }
+                        },
+                    },
+                }
+            });
+
+            // Populate referral table
+            const referralTableBody = $("#referral-table-body");
+            referralTableBody.empty(); // Clear existing rows
+
+            purposeLabels.forEach((label, index) => {
+                const percentage = ((purposeCounts[index] / response.total_visits) * 100).toFixed(2);
+                const row = `
+                    <tr>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div>
+                                    <img src="path/to/logo.svg" class="avatar avatar-sm me-2" alt="${label}">
+                                </div>
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm">${label}</h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle text-center text-sm">
+                            <span class="text-xs font-weight-bold"> ${percentage}% </span>
+                        </td>
+                    </tr>
+                `;
+                referralTableBody.append(row);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Error fetching statistics data: ", xhr.responseText);
+        }
+    });
+});
+</script>
+<script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
 </script>
 
-</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const exportButton = document.querySelector('.btn-outline-secondary');
 
+        exportButton.addEventListener('click', function() {
+            // Define the data to export
+            const data = [
+                ['Metric', 'Value'],
+                ['Total Users', document.getElementById('total-users').innerText],
+                ['Total Visits', document.getElementById('total-visits').innerText],
+                ['Average Visits Per Day', document.getElementById('average-visits').innerText],
+            ];
+
+            // Create a new workbook and add the data
+            const wb = XLSX.utils.book_new();
+            const ws = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(wb, ws, 'Dashboard Data');
+
+            // Generate Excel file and trigger download
+            XLSX.writeFile(wb, 'dashboard_data.xlsx');
+        });
+    });
+</script>
+
+
+<script>
+
+    function setVisitId(visitId) {
+        document.getElementById('cancelVisitId').value = visitId;
+    }
+
+    function handleDetailsClick(event) {
+            event.preventDefault(); // Prevent the default link behavior
+
+            // Get the ID from the data-id attribute
+             var visitId = event.currentTarget.getAttribute('data-id');
+
+            // Define the URL for your endpoint
+            var endpointUrl = '/update-visit/' + visitId;  // Adjust URL if necessary
+
+            // Prepare data to send (example data; adjust as needed)
+            var dataToSend = {
+                exit_time: new Date().toISOString(),
+                status: "Exited"
+            };
+
+            console.log("WE HIT HERE: " + visitId);
+
+            // Make the PUT request
+            fetch(endpointUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSend)
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // Handle the response data
+                // For example, show a success message or update the UI
+                alert('Visit updated successfully');
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle any errors
+                alert('Failed to update visit');
+            });
+        }
+</script>
+</body>
 </html>
